@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Catalogue</title>
+    <style>
+        .book { border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <h1>Book Catalogue</h1>
+    <div id="bookList"></div>
+
+    <script>
+        fetch('book.xml')
+            .then(response => response.text())
+            .then(xmlText => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                
+                const books = xmlDoc.querySelectorAll('book');
+                const bookListDiv = document.getElementById('bookList');
+
+                books.forEach(book => {
+                    const id = book.getAttribute('id');
+                    const title = book.querySelector('title').textContent;
+                    const author = book.querySelector('author').textContent;
+                    const price = book.querySelector('price').textContent;
+
+                    const bookDiv = document.createElement('div');
+                    bookDiv.className = 'book';
+                    bookDiv.innerHTML = `
+                        <h3>${title} (ID: ${id})</h3>
+                        <p>Author: ${author}</p>
+                        <p>Price: $${price}</p>
+                    `;
+                    bookListDiv.appendChild(bookDiv);
+                });
+            })
+            .catch(err => {
+                console.error('Failed to load XML:', err);
+                document.getElementById('bookList').textContent = 'Failed to load data. Please check the file path.';
+            });
+    </script>
+</body>
+</html>
