@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookCatalogue>
+    <book id="b001">
+        <title>Learning XML</title>
+        <author>Erik T. Ray</author>
+        <price>39.99</price>
+    </book>
+    <book id="b002">
+        <title>JavaScript Guide</title>
+        <author>David Flanagan</author>
+        <price>49.99</price>
+    </book>
+    <book id="b003">
+        <title>HTML and CSS</title>
+        <author>Jon Duckett</author>
+        <price>29.99</price>
+    </book>
+</bookCatalogue>
